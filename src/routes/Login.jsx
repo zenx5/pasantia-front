@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { 
     Box, 
+    Grid,
     Card, 
     CardActions, 
     CardContent, 
@@ -11,7 +12,7 @@ import {
     OutlinedInput,
     InputAdornment, 
     IconButton } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { Visibility, VisibilityOff, ArrowBack } from '@mui/icons-material'
 import { trans, labels } from '../tools/common';
 
 export default function Login( props ) {
@@ -66,10 +67,19 @@ export default function Login( props ) {
                 </FormControl>
             </CardContent>
             <CardActions style={{justifyContent:'center'}}>
-                <Button 
-                    variant='contained'
-                    onClick={onLogin}
-                    >{trans(labels('accept'))}</Button>
+                <Grid container style={{marginBottom:'10px'}}>
+                    <Grid item xs={1} style={{display:'flex', justifyContent:'end'}}>
+                        <IconButton onClick={()=>{window.history.go(-1)}}>
+                            <ArrowBack />                            
+                        </IconButton>
+                    </Grid>
+                    <Grid item xs={11} style={{display:'flex', justifyContent:'center'}}>
+                        <Button 
+                            variant='contained'
+                            onClick={()=>onLogin(user, pass)}
+                            >{trans(labels('accept'))}</Button>
+                    </Grid>
+                </Grid>
             </CardActions>
         </Card>
         </Box>
