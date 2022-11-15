@@ -11,7 +11,8 @@ import {
     InputLabel, 
     OutlinedInput,
     InputAdornment, 
-    IconButton } from '@mui/material'
+    IconButton, 
+    Typography} from '@mui/material'
 import { Visibility, VisibilityOff, ArrowBack } from '@mui/icons-material'
 import { trans, labels } from '../tools/common';
 
@@ -65,6 +66,7 @@ export default function Login( props ) {
                         label={trans(labels('password'))} 
                     />
                 </FormControl>
+                <Typography style={{color:'red', textAlign:'center'}}>{error}</Typography>
             </CardContent>
             <CardActions style={{justifyContent:'center'}}>
                 <Grid container style={{marginBottom:'10px'}}>

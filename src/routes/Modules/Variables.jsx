@@ -4,8 +4,10 @@ import {
     Grid,
     Typography,
     Modal,
+    IconButton,
     Button
  } from '@mui/material'
+import { ArrowBack } from '@mui/icons-material';
 import { LatBar, ListView } from '../../components';
 
 import { trans, labels } from '../../tools/common';
@@ -69,7 +71,7 @@ export default function Variables( props ) {
 
     const getVariablesMIMAC = async () => {
         const { data } = await getResource('entities/byProyect', idProyect )
-        const newVariables = data.data.map( entity => { 
+        const newVariables = data.data.map( (entity, index) => { 
             let influence = 0
             let dependence = 0
             entity.Features.forEach( feature => {
@@ -77,6 +79,7 @@ export default function Variables( props ) {
                 if( feature.name === 'influence' ) influence = parseFloat( feature.value )
             })
             return {
+                id: index,
                 name:entity.name,
                 influence,
                 dependence
@@ -207,7 +210,12 @@ export default function Variables( props ) {
                 <Grid item xs={9}>
                     <Grid container>
                         { name && <>
-                            <Grid item xs={12}>
+                            <Grid item xs={1}>
+                                <IconButton onClick={()=>{window.history.go(-1)}}>
+                                    <ArrowBack />                            
+                                </IconButton>
+                            </Grid>
+                            <Grid item xs={11}>
                                 <Typography style={{fontSize:'2rem', textAlign:'center', fontWeight:'bold'}}>{name}</Typography>
                             </Grid>
                             <Grid item xs={12}>
@@ -287,7 +295,7 @@ export default function Variables( props ) {
                             <ListView 
                                 headers={[
                                     ...headers,
-                                    { key: 'id', name: trans('ZONA'), default: '', format: calculateZone },
+                                    { key: 'name', name: trans('ZONA'), default: '', format: (index)=>calculateZone(index) },
                                 ]}
                                 disableSelection
                                 records={variables}  

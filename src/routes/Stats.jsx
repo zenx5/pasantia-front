@@ -25,7 +25,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getResource } from '../tools/resourceRequest';
 import { Refresh } from '@mui/icons-material';
 
-import { Sell, Visits } from '.'
+import { Sell, Visits, DataUsers } from '.'
 import { ListView } from '../components'
 
 export default function Stats( props ) {
@@ -101,11 +101,11 @@ export default function Stats( props ) {
         // display: 'flex'
         }}>
             <Tabs value={tab} onChange={(ev, newValue)=>setTab(newValue)}>
-                <Tab label='element 1' value={0}/>
-                <Tab label='element 2' value={1}/>
-                <Tab label='element 3' value={2}/>
+                <Tab label='element 0' value={0}/>
+                <Tab label='element 1' value={1}/>
+                <Tab label='element 2' value={2}/>
             </Tabs>
-            <Grid container style={{ marginTop:20 }}>
+            { tab===0 && <Grid container style={{ marginTop:20 }}>
                 <Grid item xs={5}>
                     <Typography style={{fontSize:'2rem', textAlign:'center', fontWeight:'bold'}}>Estadisticas</Typography>
                 </Grid>
@@ -159,7 +159,15 @@ export default function Stats( props ) {
                     
                     
                 </Grid>
-            </Grid>
+            </Grid>}
+            { tab===1 && <Grid container style={{ marginTop:20 }}>
+                <Grid item xs={6}>
+                    <DataUsers />
+                </Grid>
+            </Grid>}
+            { tab===2 && <Grid container style={{ marginTop:20 }}>
+                tab 2     
+            </Grid>}
         </Box>
     );
 }

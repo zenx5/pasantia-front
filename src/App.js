@@ -8,6 +8,7 @@ import { getResource, setResource } from "./tools/resourceRequest";
 export default function App() {
   const [user, setUser] = useState(null)
   const [type, setType] = useState(null)
+  const [errorLogin, seterrorLogin] = useState('')
   const navigate = useNavigate()
   useEffect(() => {
     setUser( prev => sessionStorage.getItem('user') )
@@ -55,7 +56,7 @@ export default function App() {
       setUser( prev => data.data[0].nickname )
       setType( prev => data.data[0].type )
     }else{
-      //error
+      seterrorLogin(prev=> data.message )
     }
     
   }
@@ -75,7 +76,7 @@ export default function App() {
                 <Home />
               </>
             } />
-          <Route path={`${process.env.REACT_APP_ROUTE_LOGIN}`} element={<Login onLogin={handlerEventLogin} />} />
+          <Route path={`${process.env.REACT_APP_ROUTE_LOGIN}`} element={<Login onLogin={handlerEventLogin} error={errorLogin}/>} />
           <Route 
             path={`${process.env.REACT_APP_ROUTE_MODULE}`}
             element={

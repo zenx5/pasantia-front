@@ -6,6 +6,7 @@ import Actors from "./Modules/Actors"
 import Stats from "./Stats"
 import Sell from "./Sell"
 import Visits from "./Visits"
+import DataUsers from "./DataUsers";
 
 export {
     Login,
@@ -16,4 +17,5 @@ export {
     Stats,
     Sell,
     Visits,
+    DataUsers,
 }
