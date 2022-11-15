@@ -78,10 +78,10 @@ export default function Sell( props ) {
           datasets: [
             {
               fill: mode?.split('|').includes('fill'),
-              label: 'Visitas',
-              data: dataVisitas,
-              borderColor: 'rgb(255, 99, 132)',
-              backgroundColor: 'rgba(255, 99, 132, 0.5)',
+              label: 'Compras',
+              data: dataCompras,
+              borderColor: 'rgb(132, 255, 99, 0.5)',
+              backgroundColor: 'rgba(132, 255, 99, 0.5)',
             },
             {
               fill: mode?.split('|').includes('fill'),
@@ -92,10 +92,10 @@ export default function Sell( props ) {
             },
             {
               fill: mode?.split('|').includes('fill'),
-              label: 'Compras',
-              data: dataCompras,
-              borderColor: 'rgb(132, 255, 99, 0.5)',
-              backgroundColor: 'rgba(132, 255, 99, 0.5)',
+              label: 'Visitas',
+              data: dataVisitas,
+              borderColor: 'rgb(255, 99, 132)',
+              backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
           ],
       }

@@ -6,9 +6,10 @@ import {
     Select,
     MenuItem,
     TextField,
-    Typography
- } from '@mui/material'
-
+    Typography,
+    Tabs, 
+    Tab
+} from '@mui/material'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -23,11 +24,13 @@ import { Line } from 'react-chartjs-2';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getResource } from '../tools/resourceRequest';
 import { Refresh } from '@mui/icons-material';
+
 import { Sell, Visits } from '.'
 import { ListView } from '../components'
 
 export default function Stats( props ) {
     const navigate = useNavigate()
+    const [tab, setTab] = useState(0)
     const [labels, setLabels] = useState([])
     const [start, setStart] = useState(null)
     const [end, setEnd] = useState(null)
@@ -97,7 +100,11 @@ export default function Stats( props ) {
         // justifyContent: 'center',
         // display: 'flex'
         }}>
-
+            <Tabs value={tab} onChange={(ev, newValue)=>setTab(newValue)}>
+                <Tab label='element 1' value={0}/>
+                <Tab label='element 2' value={1}/>
+                <Tab label='element 3' value={2}/>
+            </Tabs>
             <Grid container style={{ marginTop:20 }}>
                 <Grid item xs={5}>
                     <Typography style={{fontSize:'2rem', textAlign:'center', fontWeight:'bold'}}>Estadisticas</Typography>
