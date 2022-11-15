@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom"
 import { LatBar, NavBar } from "./components";
-import { Home, Login, Modules, Variables, Stats } from "./routes";
+import { Home, Login, Modules, Variables, Actors, Stats } from "./routes";
 import { getResource, setResource } from "./tools/resourceRequest";
 
 
@@ -17,20 +17,19 @@ export default function App() {
     const defaultMenu = [
       { label: 'Home', action: ()=>navigate(process.env.REACT_APP_ROUTE_MAIN) },
       { label: 'Statistics', action: ()=>navigate(`/${process.env.REACT_APP_ROUTE_STAT}`) },
-      { label: 'Modules', action: ()=>navigate(`/${process.env.REACT_APP_ROUTE_MODULE}`) }
     ]
     switch( type ){
       case 'administrador':
         return [
           ...defaultMenu,
-          
+          { label: 'Modules', action: ()=>navigate(`/${process.env.REACT_APP_ROUTE_MODULE}`) }
         ]
       case 'estudiante':
       case 'profesor':
       case 'instituto':
         return [
           ...defaultMenu,
-          
+          { label: 'Modules', action: ()=>navigate(`/${process.env.REACT_APP_ROUTE_MODULE}`) }
         ]
       default:
         return defaultMenu
@@ -102,7 +101,7 @@ export default function App() {
               </>
             } />
           <Route 
-            path={`${process.env.REACT_APP_ROUTE_VARIABLE}/:name`}
+            path={`${process.env.REACT_APP_ROUTE_VARIABLE}/:name/:idProyect`}
             element={
               <>
                 <NavBar 
@@ -111,6 +110,18 @@ export default function App() {
                   onLogout={handlerEventLogout} 
                   onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)}/>
                 <Variables />
+              </>
+            } />
+          <Route 
+            path={`${process.env.REACT_APP_ROUTE_ACTOR}/:name/:idActor`}
+            element={
+              <>
+                <NavBar 
+                  items={getMenu()} 
+                  current={user} 
+                  onLogout={handlerEventLogout} 
+                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)}/>
+                <Actors />
               </>
             } />
           <Route 

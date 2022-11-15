@@ -6,11 +6,11 @@ import {
     Modal,
     Button
  } from '@mui/material'
-import { LatBar, ListView } from '../components';
+import { LatBar, ListView } from '../../components';
 
-import { trans, labels } from '../tools/common';
+import { trans, labels } from '../../tools/common';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getResource } from '../tools/resourceRequest';
+import { getResource, setResource } from '../../tools/resourceRequest';
 import { 
     Chart as ChartJS,
     ArcElement,
@@ -23,9 +23,9 @@ import {
 import { Pie, Scatter } from 'react-chartjs-2';
 
 
-export default function Modules( props ) {
+export default function Variables( props ) {
     const navigate = useNavigate()
-    const { name } = useParams()
+    const { name, idProyect } = useParams()
     const [modules, setmodules] = useState([])
     const [variables, setvariables] = useState([])
     const [open, setopen] = useState(false)
@@ -53,19 +53,74 @@ export default function Modules( props ) {
 
     const getModules = async () => {
         const { data } = await getResource('modules')
+        console.log( data )
         setmodules(prev => data.data )
-        const newVariables = data.data.filter( module=>module.name === name ).map( module => module.Variables )
-        setvariables(prev => newVariables[0] )
-        let maxI = Math.max(...newVariables[0].map(variable=>variable.influence))
-        let maxD = Math.max(...newVariables[0].map(variable=>variable.dependence))
+        await getVariables()
+    }
+
+    const getVariables = async () => {
+        if( name === 'MIMAC' ){
+            await getVariablesMIMAC()
+        }else if( name === 'MACTOR' ){
+            await getVariablesMACTOR()
+        }
+        
+    }
+
+    const getVariablesMIMAC = async () => {
+        const { data } = await getResource('entities/byProyect', idProyect )
+        const newVariables = data.data.map( entity => { 
+            let influence = 0
+            let dependence = 0
+            entity.Features.forEach( feature => {
+                if( feature.name === 'dependence' ) dependence = parseFloat( feature.value )
+                if( feature.name === 'influence' ) influence = parseFloat( feature.value )
+            })
+            return {
+                name:entity.name,
+                influence,
+                dependence
+            }  
+        } )
+        console.log('newVariables', newVariables)
+        setvariables(prev => newVariables )
+        let maxI = Math.max(...newVariables.map(variable=>variable.influence))
+        let maxD = Math.max(...newVariables.map(variable=>variable.dependence))
         setmaxInfluence( prev => maxI )
         setmaxDependence( prev => maxD )
         setfactorX( prev => Math.max( maxI, maxD ) )
     }
 
-    const getVariables = async (forName) => {
-        const newVariables = modules.filter( module=>module.name === forName ).map( module => module.Variables )
-        setvariables(prev => newVariables )        
+    const getVariablesMACTOR = async () => {
+        let { data } = await getResource('entities/byProyect', idProyect )
+        let variablesId = []
+        data.data.map( entity => (entity.Features.map( feature => (feature.name==='variable' ? feature.value : null ))) ).forEach( item => {
+            variablesId = [...variablesId, ...item]
+        })
+        console.log('variablesId', variablesId)
+        let result = await setResource('entities/byIds',{list:variablesId})
+        data = result.data
+        const newVariables = data.data.map( entity => { 
+            let influence = 0
+            let dependence = 0
+            entity.Features.forEach( feature => {
+                if( feature.name === 'dependence' ) dependence = parseFloat( feature.value )
+                if( feature.name === 'influence' ) influence = parseFloat( feature.value )
+            })
+            return {
+                name:entity.name,
+                influence,
+                dependence
+            }  
+        } )
+        console.log('newVariables', newVariables)
+        setvariables(prev => newVariables )
+        let maxI = Math.max(...newVariables.map(variable=>variable.influence))
+        let maxD = Math.max(...newVariables.map(variable=>variable.dependence))
+        setmaxInfluence( prev => maxI )
+        setmaxDependence( prev => maxD )
+        setfactorX( prev => Math.max( maxI, maxD ) )
+        
     }
 
     const headers = [

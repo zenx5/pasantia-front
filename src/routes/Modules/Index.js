@@ -4,14 +4,14 @@ import {
     Grid,
     Typography
  } from '@mui/material'
-import { LatBar, ListView } from '../components';
+import { LatBar, ListView } from '../../components';
 
-import { trans, labels } from '../tools/common';
+import { trans, labels } from '../../tools/common';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getResource } from '../tools/resourceRequest';
+import { getResource } from '../../tools/resourceRequest';
 
 
-export default function Modules( props ) {
+export default function Index( props ) {
     const navigate = useNavigate()
     const { name } = useParams()
     const [modules, setmodules] = useState([])
@@ -50,8 +50,9 @@ export default function Modules( props ) {
         navigate(`/${process.env.REACT_APP_ROUTE_MODULE}/${moduleName}`)   
     }
 
-    const showVariables = async (moduleName) => {
-        navigate(`/${process.env.REACT_APP_ROUTE_VARIABLE}/${moduleName}`)   
+    const showVariables = async (moduleName, ID) => {
+        if(moduleName==='MIMAC') navigate(`/${process.env.REACT_APP_ROUTE_VARIABLE}/${moduleName}/${ID}`)
+        if(moduleName==='MACTOR') navigate(`/${process.env.REACT_APP_ROUTE_ACTOR}/${moduleName}/${ID}`)
     }
 
     return (
@@ -80,7 +81,7 @@ export default function Modules( props ) {
                             headers={headers}
                             disableSelection
                             records={proyects}
-                            onView={()=>{showVariables(name)}}
+                            onView={(id)=>{showVariables(name, id)}}
                             id={'id'}
                         />
                     </>}
