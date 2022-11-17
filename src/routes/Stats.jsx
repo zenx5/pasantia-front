@@ -161,7 +161,7 @@ export default function Stats( props ) {
                 </Grid>
             </Grid>}
             { tab===1 && <Grid container style={{ marginTop:20 }}>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                     <DataUsers />
                 </Grid>
             </Grid>}

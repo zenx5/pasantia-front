@@ -18,14 +18,18 @@ export default function DataUsers(){
         setusers(prev => data.data)
     }
 
-    const getModules = async (proyects)=>{
-        // let modules = []
-        // for( let index=0; index < proyects.length; index++){
-        //     const { data } = await getResource('proyects', proyects[index].id )
-        //     data.data.forEach( proyect )
-        //     modules.push( data.data.map( item => item.Modules.name ))
-        // }
-        return ''
+    const getModules = (proyects)=>{
+        let result = []
+        let modules = proyects.map( proyect => proyect.module.split(','))
+        console.log(modules)
+        modules.forEach( module => {
+            module.forEach( mod => {
+                if( !result.includes( mod ) ){
+                    result.push( mod )
+                }
+            })
+        })
+        return result.join(',')
     }
 
     const headers = [
