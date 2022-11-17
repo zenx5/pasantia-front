@@ -4,90 +4,62 @@ import {
     Grid,
     Typography
  } from '@mui/material'
-import { LatBar, ListView } from '../../components';
+import { LateralModules, ListView } from '../../components';
 
 import { trans, labels } from '../../tools/common';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getResource } from '../../tools/resourceRequest';
 
 
+
 export default function Index( props ) {
     const navigate = useNavigate()
     const { name } = useParams()
-    const [modules, setmodules] = useState([])
-    const [proyects, setproyects] = useState([])
+    // const [proyects, setproyects] = useState([])
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        (async ()=>{
-            if(modules.length === 0){
-                await getModules()
-            }
-            if(proyects.length === 0){
-                await getProyects()     
-            }       
-        })()
-    },[]);
+    //     (async ()=>{
+    //         if(proyects.length === 0){
+    //             await getProyects(name)     
+    //         }       
+    //     })()
+    // },[]);
 
-    const getModules = async () => {
-        const { data } = await getResource('modules')
-        setmodules(prev => data.data )
-    }
-
-    const getProyects = async (forName) => {
-        const { data } = await getResource('proyects')
-        setproyects(prev => data.data.filter( proyect => proyect.Modules.map(module=>module.name).includes(forName ?? name)) )
-    }
+    // const getProyects = async (byName) => {
+    //     const { data } = await getResource('proyects')
+    //     console.log( data )
+    //     setproyects(prev => data.data.filter( proyect => {
+    //         return proyect.module.includes( byName )
+    //     } ) )
+    // }
 
     const headers = [
         { key: 'name', name: trans('Proyect'), default: '' },
         { key: 'createdAt', name: trans('Date'), default: '', format: (index, item) => item.split('T')[0] },
-        { key: 'Modules', name: trans('Method(s)'), default: [], format: (index, item) => item.map( element=>element.name).join(', ')  },
+        { key: 'module', name: trans('Method(s)'), default: [] },
     ]
 
-    const openModule = async (moduleName) => {
-        await getProyects( moduleName )
-        navigate(`/${process.env.REACT_APP_ROUTE_MODULE}/${moduleName}`)   
-    }
-
     const showVariables = async (moduleName, ID) => {
-        if(moduleName==='MIMAC') navigate(`/${process.env.REACT_APP_ROUTE_VARIABLE}/${moduleName}/${ID}`)
-        if(moduleName==='MACTOR') navigate(`/${process.env.REACT_APP_ROUTE_ACTOR}/${moduleName}/${ID}`)
+        if(moduleName==='MIMAC') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/variables`)
+        if(moduleName==='MACTOR') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/actores`)
+        if(moduleName==='SMIC-PRO EXPERT') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/eventos`)
+        if(moduleName==='MORPHOL') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/hipotesis`)
+        if(moduleName==='MULTIPOL') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/politicas`)
     }
 
-    return (
-        <Box style={{
-        // height: '100vh',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // display: 'flex'
-        }}>
-
-            <Grid container style={{ height: '100vh' }}>
-                <Grid item xs={3} style={{backgroundColor: '#393b48', color:'#fff'}}>
-                    <LatBar 
-                        items={modules.map( module => (
-                            { 
-                                label:module.name,
-                                action: (ev)=>{openModule( module.name )}
-                            }))
-                        } 
-                    />
-                </Grid>
-                <Grid item xs={9}>
-                    { name && <>
-                        <Typography style={{fontSize:'2rem', textAlign:'center', fontWeight:'bold'}}>{name}</Typography>
-                        <ListView 
-                            headers={headers}
-                            disableSelection
-                            records={proyects}
-                            onView={(id)=>{showVariables(name, id)}}
-                            id={'id'}
-                        />
-                    </>}
-                </Grid>
-            </Grid>
-        </Box>
+    return (<>
+        { name && <>
+            <Typography style={{fontSize:'2rem', textAlign:'center', fontWeight:'bold'}}>{name}</Typography>
+            <ListView 
+                headers={headers}
+                disableSelection
+                records={props.proyects}
+                onView={(id)=>{showVariables(name, id)}}
+                id={'id'}
+            />
+        </>}  
+        </>              
     );
 }
 
