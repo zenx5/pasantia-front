@@ -11,11 +11,12 @@ import {
   TablePagination,
   IconButton,
   LinearProgress,
+  Grid,
 } from '@mui/material';
 import { Edit as EditIcon, Visibility as EyeIcon } from '@mui/icons-material';
 
 export default function ListView(props) {
-  const { sort, sortBy, loading } = props;
+  const { sort, sortBy, loading, actionsTable } = props;
   const [filter, setFilter] = React.useState(props.filter);
   const [perPage, setPerPage] = React.useState(5);
   const [page, setPage] = React.useState(1);
@@ -165,25 +166,32 @@ export default function ListView(props) {
           </TableBody>
         </Table>
         { loading && <LinearProgress/> }
-        <TablePagination
-          rowsPerPageOptions={[
-            { label: '5', value: 5 },
-            { label: '10', value: 10 },
-            { label: '20', value: 20 },
-            { label: 'All', value: records.length },
-          ]}
-          component='div'
-          labelDisplayedRows={({ from, to, count }) => {
-            from = (page - 1) * perPage + 1;
-            to = from + perPage > count ? count : from + perPage - 1;
-            return `${from}–${to} of ${count !== -1 ? count : `more than ${to}`}`;
-          }}
-          count={records.filter(filterRecord).length}
-          rowsPerPage={perPage}
-          page={page - 1}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <Grid container>
+          <Grid item xs={4} style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+            {actionsTable}
+          </Grid>
+          <Grid item xs={8}>
+            <TablePagination
+              rowsPerPageOptions={[
+                { label: '5', value: 5 },
+                { label: '10', value: 10 },
+                { label: '20', value: 20 },
+                { label: 'All', value: records.length },
+              ]}
+              component='div'
+              labelDisplayedRows={({ from, to, count }) => {
+                from = (page - 1) * perPage + 1;
+                to = from + perPage > count ? count : from + perPage - 1;
+                return `${from}–${to} of ${count !== -1 ? count : `more than ${to}`}`;
+              }}
+              count={records.filter(filterRecord).length}
+              rowsPerPage={perPage}
+              page={page - 1}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Grid>
+        </Grid>
       </TableContainer>
     </React.Fragment>
   );

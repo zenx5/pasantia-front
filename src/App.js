@@ -1,18 +1,34 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom"
-import { LatBar, NavBar } from "./components";
-import { Home, Login, Modules, Variables, Actors, Stats } from "./routes";
+import { LatBar, LateralModules, NavBar } from "./components";
+import { DobleColumns } from "./layout";
+import { Home, Login, Modules, Entities, Stats } from "./routes";
 import { getResource, setResource } from "./tools/resourceRequest";
 
 
 export default function App() {
+  const [proyects, setproyects] = useState([])
   const [user, setUser] = useState(null)
   const [type, setType] = useState(null)
   const [errorLogin, seterrorLogin] = useState('')
   const navigate = useNavigate()
+  
   useEffect(() => {
-    setUser( prev => sessionStorage.getItem('user') )
-  });
+    (async ()=>{
+      setUser( prev => sessionStorage.getItem('user') )
+      if(proyects.length === 0){
+          await getProyects()
+      }       
+    })()
+  },[]);
+
+  const getProyects = async (byName) => {
+    const { data } = await getResource('proyects')
+    console.log( data )
+    setproyects(prev => data.data.filter( proyect => {
+        return proyect.module.includes( byName )
+    } ) )
+  }
 
   const getMenu = () => {
     const defaultMenu = [
@@ -67,75 +83,82 @@ export default function App() {
           <Route 
             path={`${process.env.REACT_APP_ROUTE_MAIN}`}
             element={
-              <>
-                <NavBar 
-                  items={getMenu()} 
-                  current={user} 
+              <DobleColumns 
+                header={<NavBar
+                  items={getMenu()}
+                  current={user}
                   onLogout={handlerEventLogout}
                   onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                <Home />
-              </>
+                }
+                WidthTwo={12}
+                ColumnTwo={<Home />}
+              />
             } />
           <Route path={`${process.env.REACT_APP_ROUTE_LOGIN}`} element={<Login onLogin={handlerEventLogin} error={errorLogin}/>} />
           <Route 
             path={`${process.env.REACT_APP_ROUTE_MODULE}`}
             element={
-              <>
-                <NavBar 
-                  items={getMenu()} 
-                  current={user} 
+              <DobleColumns 
+                header={<NavBar
+                  items={getMenu()}
+                  current={user}
                   onLogout={handlerEventLogout}
                   onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                <Modules />
-              </>
+                }
+                WidthOne={3}
+                WidthTwo={9}
+                StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
+                ColumnOne={<LateralModules onClick={getProyects} />}
+                ColumnTwo={<Modules proyects={proyects} />}
+              />
             } />
           <Route 
             path={`${process.env.REACT_APP_ROUTE_MODULE}/:name`}
             element={
-              <>
-                <NavBar 
-                  items={getMenu()} 
-                  current={user} 
+              <DobleColumns 
+                header={<NavBar
+                  items={getMenu()}
+                  current={user}
                   onLogout={handlerEventLogout}
                   onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                <Modules />
-              </>
+                }
+                WidthOne={3}
+                WidthTwo={9}
+                StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
+                ColumnOne={<LateralModules onClick={getProyects} />}
+                ColumnTwo={<Modules proyects={proyects} />}
+              />
             } />
           <Route 
-            path={`${process.env.REACT_APP_ROUTE_VARIABLE}/:name/:idProyect`}
+            path={`${process.env.REACT_APP_ROUTE_ENTITY}/:name/:idProyect/:type`}
             element={
-              <>
-                <NavBar 
-                  items={getMenu()} 
-                  current={user} 
-                  onLogout={handlerEventLogout} 
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)}/>
-                <Variables />
-              </>
-            } />
-          <Route 
-            path={`${process.env.REACT_APP_ROUTE_ACTOR}/:name/:idActor`}
-            element={
-              <>
-                <NavBar 
-                  items={getMenu()} 
-                  current={user} 
-                  onLogout={handlerEventLogout} 
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)}/>
-                <Actors />
-              </>
+              <DobleColumns 
+                header={<NavBar
+                  items={getMenu()}
+                  current={user}
+                  onLogout={handlerEventLogout}
+                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
+                }
+                WidthOne={3}
+                WidthTwo={9}
+                StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
+                ColumnOne={<LateralModules onClick={getProyects} />}
+                ColumnTwo={<Entities />}
+              />
             } />
           <Route 
             path={`${process.env.REACT_APP_ROUTE_STAT}`}
             element={
-              <>
-                <NavBar 
-                  items={getMenu()} 
-                  current={user} 
-                  onLogout={handlerEventLogout} 
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)}/>
-                <Stats />
-              </>
+              <DobleColumns 
+                header={<NavBar
+                  items={getMenu()}
+                  current={user}
+                  onLogout={handlerEventLogout}
+                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
+                }
+                WidthTwo={12}
+                ColumnTwo={<Stats />}
+              />
             } />
         </Routes>
       

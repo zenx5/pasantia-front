@@ -17,7 +17,7 @@ export default function LatBar( props ){
     return(
         <List>
             {items.map( item => (<ListItem key={item.label}>
-                <ListItemButton onClick={item.action}>
+                <ListItemButton disabled={item.disabled} onClick={item.action}>
                     <ListItemIcon>
                         <Face  sx={{ color: '#fff' }}  />
                     </ListItemIcon>
