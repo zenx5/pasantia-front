@@ -22,6 +22,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import { pluginDownloadButton } from '../../tools/plugins'
 import { Pie, Scatter } from 'react-chartjs-2';
 
 
@@ -45,7 +46,7 @@ export default function Entities( props ) {
     const [haseventos, sethaseventos] = useState(false)
     const [hashipotesis, sethashipotesis] = useState(false)
 
-    ChartJS.register(ArcElement, LinearScale, PointElement, LineElement, Tooltip, Legend);
+    ChartJS.register(pluginDownloadButton, ArcElement, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
     useEffect(() => {
         
@@ -195,6 +196,9 @@ export default function Entities( props ) {
                         // .filter( entity => (entity.influence>factorX/2 && entity.dependence>factorX/2) )
                         onView={handlerViewEvent}
                         id={'id'}
+                        actionsTable={
+                            <Button variant='outlined'>Download</Button>
+                        }
                     />
                 </Grid>
             </>}
@@ -271,6 +275,9 @@ export default function Entities( props ) {
                     records={entities}  
                     onView={handlerViewEvent}
                     id={'id'}
+                    actionsTable={
+                        <Button variant='outlined'>Download</Button>
+                    }
                 />
             </Grid>}
         

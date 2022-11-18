@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { 
-    Box, 
-    Grid,
-    Typography
+    Typography,
  } from '@mui/material'
 import { LateralModules, ListView } from '../../components';
 
@@ -15,24 +13,7 @@ import { getResource } from '../../tools/resourceRequest';
 export default function Index( props ) {
     const navigate = useNavigate()
     const { name } = useParams()
-    // const [proyects, setproyects] = useState([])
-
-    // useEffect(() => {
-        
-    //     (async ()=>{
-    //         if(proyects.length === 0){
-    //             await getProyects(name)     
-    //         }       
-    //     })()
-    // },[]);
-
-    // const getProyects = async (byName) => {
-    //     const { data } = await getResource('proyects')
-    //     console.log( data )
-    //     setproyects(prev => data.data.filter( proyect => {
-    //         return proyect.module.includes( byName )
-    //     } ) )
-    // }
+    
 
     const headers = [
         { key: 'name', name: trans('Proyect'), default: '' },

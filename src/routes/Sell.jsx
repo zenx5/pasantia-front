@@ -15,6 +15,7 @@ import {
 import { Chart, Line } from 'react-chartjs-2';
 
 
+
 export default function Sell( props ) {
     ChartJS.register(
         ArcElement,
