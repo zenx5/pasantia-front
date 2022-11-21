@@ -5,6 +5,7 @@ import { Box, Grid } from "@mui/material";
 export default function DobleColumns( props ){
     const { 
         header,
+        footer,
         ColumnOne, 
         ColumnTwo,
         WidthOne,
@@ -26,5 +27,6 @@ export default function DobleColumns( props ){
                 </Grid>
             </Grid>
         </Box>
+        { footer }
     </>)
 }

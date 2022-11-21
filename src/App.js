@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom"
-import { LatBar, LateralModules, NavBar } from "./components";
+import { LatBar, LateralModules, NavBar, FooterCustom } from "./components";
 import { DobleColumns } from "./layout";
 import { Home, Login, Modules, Entities, Stats } from "./routes";
 import { getResource, setResource } from "./tools/resourceRequest";
@@ -32,7 +32,11 @@ export default function App() {
 
   const getMenu = () => {
     const defaultMenu = [
-      { label: 'Home', action: ()=>navigate(process.env.REACT_APP_ROUTE_MAIN) },
+      { label: 'Info', action: ()=>navigate(process.env.REACT_APP_ROUTE_INFO) },
+      { label: 'Perfiles', action: ()=>navigate(process.env.REACT_APP_ROUTE_PROFILE) },
+      { label: 'Contactos', action: ()=>navigate(process.env.REACT_APP_ROUTE_CONTACT) },
+      { label: 'Metodos Prospectivos', action: ()=>navigate(process.env.REACT_APP_ROUTE_METHOD) },
+      { label: 'Indicadores', action: ()=>navigate(process.env.REACT_APP_ROUTE_INDICATOR) },
       { label: 'Statistics', action: ()=>navigate(`/${process.env.REACT_APP_ROUTE_STAT}`) },
     ]
     switch( type ){
@@ -92,6 +96,7 @@ export default function App() {
                 }
                 WidthTwo={12}
                 ColumnTwo={<Home />}
+                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
           <Route path={`${process.env.REACT_APP_ROUTE_LOGIN}`} element={<Login onLogin={handlerEventLogin} error={errorLogin}/>} />
@@ -110,6 +115,7 @@ export default function App() {
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
                 ColumnOne={<LateralModules onClick={getProyects} />}
                 ColumnTwo={<Modules proyects={proyects} />}
+                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -127,6 +133,7 @@ export default function App() {
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
                 ColumnOne={<LateralModules onClick={getProyects} />}
                 ColumnTwo={<Modules proyects={proyects} />}
+                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -144,6 +151,7 @@ export default function App() {
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
                 ColumnOne={<LateralModules onClick={getProyects} />}
                 ColumnTwo={<Entities />}
+                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -158,6 +166,7 @@ export default function App() {
                 }
                 WidthTwo={12}
                 ColumnTwo={<Stats />}
+                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
         </Routes>

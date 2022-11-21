@@ -1,5 +1,5 @@
 import { Logout, Login } from "@mui/icons-material";
-import { Grid, IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { Grid, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
 
 
 export default function NavBar( props ){
@@ -17,13 +17,18 @@ export default function NavBar( props ){
             }}>
             <Grid item xs={10}>
                 <Grid container>
-                    <Grid item xs={3}>Indicadores Prospectivos</Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={4} style={{ display:'flex', alignItems:'center' }}>
+                        <Typography component='h3' style={{ fontSize:'1.6rem' }}>Indicadores Prospectivos</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
                         <List style={{display:'flex', flexDirection:'row', padding: 0}}>
                             { items.map( item => ( 
-                                <ListItem key={item.label} style={{padding:'5px', width:'fit-content'}}>
+                                <ListItem key={item.label} style={{ padding:'10px', width:'fit-content' }}>
                                     <ListItemButton style={{padding:0}} onClick={item.action}>
-                                        <ListItemText primary={item.label}></ListItemText>
+                                        <ListItemText 
+                                            primary={
+                                                <Typography style={{fontSize:'1.4rem'}}>{item.label}</Typography>
+                                            }></ListItemText>
                                     </ListItemButton>
                                 </ListItem>
                             ))}
