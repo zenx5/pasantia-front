@@ -22,11 +22,9 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getResource } from '../tools/resourceRequest';
 import { Refresh } from '@mui/icons-material';
-
-import { Sell, Visits, DataUsers } from '.'
-import { ListView } from '../components'
+import { Sell, Visits, DataUsers } from '..'
+import { ListView } from '../../components'
 
 export default function Stats( props ) {
     const navigate = useNavigate()

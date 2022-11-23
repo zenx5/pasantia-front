@@ -1,18 +1,22 @@
-import Login from "./Login";
+import Login from "./Login/Index"
+import Home from "./Home/Index"
+import Info from "./Info/Index"
+import Contact from "./Contact/Index"
+import Team from "./Team/Index"
+
 import Modules from "./Modules/Index"
-import Home from "./Home"
 import Entities from "./Modules/Entities"
-import Stats from "./Stats"
-import Sell from "./Sell"
-import Visits from "./Visits"
-import DataUsers from "./DataUsers";
-import Contact from "./Contact"
-import Team from "./Team"
-import Profile from "./Profile"
+
+import Stats from "./Stats/Index"
+import Sell from "./Stats/Sell"
+import Visits from "./Stats/Visits"
+import DataUsers from "./Stats/DataUsers";
+
 
 export {
     Login,
     Modules,
+    Info,
     Home,
     Entities,
     Stats,
@@ -21,5 +25,4 @@ export {
     DataUsers,
     Contact,
     Team,
-    Profile
 }

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
-import { ListView } from "../components"
-import { getResource } from "../tools/resourceRequest"
+import { ListView } from "../../components"
+import { getResource } from "../../tools/resourceRequest"
 import {
     Chart as ChartJS,
     ArcElement,

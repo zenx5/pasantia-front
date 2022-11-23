@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material'
 
-export default function Contact(){
+export default function Index(){
 
     return(<Grid container>
         <Grid item xs={12}>

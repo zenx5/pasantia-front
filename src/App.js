@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom"
 import { LatBar, LateralModules, NavBar, FooterCustom } from "./components";
 import { SingleColumns, DobleColumns } from "./layout";
-import { Home, Contact, Team, Login, Modules, Entities, Stats, Profile } from "./routes";
+import { Home, Contact, Team, Login, Modules, Entities, Stats, Profile, Info } from "./routes";
 import { getResource, setResource } from "./tools/resourceRequest";
 
 
@@ -41,9 +41,10 @@ export default function App() {
   }
 
   const getMenu = () => {
+    const type = sessionStorage.getItem('typeuser')
+    console.log(type)
     const defaultMenu = [
       { label: 'Info', action: ()=>navigate(process.env.REACT_APP_ROUTE_INFO) },
-      { label: 'Perfiles', action: ()=>navigate(process.env.REACT_APP_ROUTE_PROFILE) },
       { label: 'Contactos', action: ()=>navigate(process.env.REACT_APP_ROUTE_CONTACT) },
       { label: 'Team', action: ()=>navigate(process.env.REACT_APP_ROUTE_TEAM) },
     ]
@@ -74,7 +75,7 @@ export default function App() {
     sessionStorage.removeItem('user_id')
     setUser( prev => null )
     setType( prev => null )
-    navigate(process.env.REACT_APP_ROUTE_MAIN)
+    navigate(process.env.REACT_APP_ROUTE_HOME)
   }
 
   const handlerEventLogin = async (user, pass) => {
@@ -92,36 +93,35 @@ export default function App() {
     
   }
 
+  const NavigationBar = () => {
+    return(<NavBar
+      onClickTitle={()=>navigate(process.env.REACT_APP_ROUTE_HOME)}
+      items={getMenu()}
+      current={user}
+      onLogout={handlerEventLogout}
+      onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />)
+  }
+
   return (<>
       
         <Routes>
           <Route 
-            path={`${process.env.REACT_APP_ROUTE_MAIN}`}
+            path={`${process.env.REACT_APP_ROUTE_HOME}`}
             element={
               <DobleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 WidthTwo={12}
                 ColumnTwo={<Home />}
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
-            path={`${process.env.REACT_APP_ROUTE_PROFILE}`}
+            path={`${process.env.REACT_APP_ROUTE_INFO}`}
             element={
               <DobleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 WidthTwo={12}
-                ColumnTwo={<Profile />}
+                ColumnTwo={<Info />}
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
@@ -130,12 +130,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_MODULE}`}
             element={
               <DobleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 WidthOne={3}
                 WidthTwo={9}
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
@@ -148,12 +143,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_MODULE}/:name`}
             element={
               <DobleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 WidthOne={3}
                 WidthTwo={9}
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
@@ -166,12 +156,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_ENTITY}/:name/:idProyect/:type`}
             element={
               <DobleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 WidthOne={3}
                 WidthTwo={9}
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
@@ -184,12 +169,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_INDICATOR}`}
             element={
               <DobleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 WidthTwo={12}
                 ColumnTwo={<Stats />}
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
@@ -199,12 +179,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_CONTACT}`}
             element={
               <SingleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 Column={<Contact />}
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
@@ -213,12 +188,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_TEAM}`}
             element={
               <SingleColumns 
-                header={<NavBar
-                  items={getMenu()}
-                  current={user}
-                  onLogout={handlerEventLogout}
-                  onLogin={()=>navigate(process.env.REACT_APP_ROUTE_LOGIN)} />
-                }
+                header={<NavigationBar />}
                 Column={<Team />}
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />

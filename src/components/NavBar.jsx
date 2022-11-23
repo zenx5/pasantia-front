@@ -1,9 +1,9 @@
 import { Logout, Login } from "@mui/icons-material";
-import { Grid, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { Grid, Button, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
 import logo from "../assets/logo.png"
 
 export default function NavBar( props ){
-    const { current, items = [], onLogin, onLogout } = props
+    const { current, items = [], onLogin, onLogout, onClickTitle } = props
 
     return(
         <Grid container 
@@ -18,10 +18,14 @@ export default function NavBar( props ){
             <Grid item xs={10}>
                 <Grid container>
                     <Grid item xs={1} style={{ display:'flex', alignItems:'center' }}>
-                        <img src={logo} alt='' width={100}/>
+                        <IconButton onClick={onClickTitle}>
+                            <img src={logo} alt='' width={100}/>
+                        </IconButton>
                     </Grid>
                     <Grid item xs={4} style={{ display:'flex', alignItems:'center' }}>
-                        <Typography component='h3' style={{ fontSize:'1.6rem', fontWeight:'bold' }}>Indicadores Prospectivos</Typography>
+                        <IconButton onClick={onClickTitle}>
+                            <Typography component='h3' style={{ fontSize:'1.6rem', fontWeight:'bold', color:'#fff' }} >Indicadores Prospectivos</Typography>
+                        </IconButton>
                     </Grid>
                     <Grid item xs={7} style={{ display:'flex', alignItems:'center' }}>
                         <List style={{display:'flex', flexDirection:'row', padding: 0}}>
