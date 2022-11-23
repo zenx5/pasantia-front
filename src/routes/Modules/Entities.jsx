@@ -5,7 +5,8 @@ import {
     Typography,
     Modal,
     IconButton,
-    Button
+    Button,
+    Tooltip as ToolMui
  } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material';
 import { LateralModules, ListView } from '../../components';
@@ -19,8 +20,8 @@ import {
     LinearScale,
     PointElement,
     LineElement,
-    Tooltip,
     Legend,
+    Tooltip
 } from 'chart.js';
 import { pluginDownloadButton } from '../../tools/plugins'
 import { Pie, Scatter } from 'react-chartjs-2';
@@ -170,11 +171,11 @@ export default function Entities( props ) {
     const calculateZone = (index) => {
         let entity = entities.find( entity => entity.id === index )
         const { influence, dependence } = entity
-        if( influence>factorX/2 && dependence<factorX/2 ) return <Typography>Poder</Typography>
-        else if( influence>factorX/2 && dependence>factorX/2 ) return <Typography style={{color:'#f10'}}>Conflicto</Typography>
-        else if( influence<factorX/2 && dependence<factorX/2 ) return <Typography>Autonomia</Typography>
-        else if( influence<factorX/2 && dependence>factorX/2 ) return <Typography>Resultados</Typography>
-        else return <Typography>Peloton</Typography>
+        if( influence>factorX/2 && dependence<factorX/2 ) return <ToolMui title='algo aqui'><Typography>Poder</Typography></ToolMui>
+        else if( influence>factorX/2 && dependence>factorX/2 ) return <ToolMui title='algo aqui'><Typography style={{color:'#f10'}}>Conflicto</Typography></ToolMui>
+        else if( influence<factorX/2 && dependence<factorX/2 ) return <ToolMui title='algo aqui'><Typography>Autonomia</Typography></ToolMui>
+        else if( influence<factorX/2 && dependence>factorX/2 ) return <ToolMui title='algo aqui'><Typography>Resultados</Typography></ToolMui>
+        else return <ToolMui title='algo aqui'><Typography>Peloton</Typography></ToolMui>
     }
 
     return (

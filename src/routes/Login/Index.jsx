@@ -14,9 +14,9 @@ import {
     IconButton, 
     Typography} from '@mui/material'
 import { Visibility, VisibilityOff, ArrowBack } from '@mui/icons-material'
-import { trans, labels } from '../tools/common';
+import { trans, labels } from '../../tools/common';
 
-export default function Login( props ) {
+export default function Index( props ) {
     const [user, setuser] = useState('');
     const [pass, setpass] = useState('');
     const [ showPassword, setshowPassword ] = useState(false)
