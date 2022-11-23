@@ -22,7 +22,7 @@ export default function Index( props ) {
     ]
 
     const showVariables = async (moduleName, ID) => {
-        if(moduleName==='MIMAC') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/variables`)
+        if(moduleName==='MICMAC') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/variables`)
         if(moduleName==='MACTOR') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/actores`)
         if(moduleName==='SMIC-PRO EXPERT') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/eventos`)
         if(moduleName==='MORPHOL') navigate(`/${process.env.REACT_APP_ROUTE_ENTITY}/${moduleName}/${ID}/hipotesis`)
