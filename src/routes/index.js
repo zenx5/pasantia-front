@@ -6,6 +6,9 @@ import Stats from "./Stats"
 import Sell from "./Sell"
 import Visits from "./Visits"
 import DataUsers from "./DataUsers";
+import Contact from "./Contact"
+import Team from "./Team"
+import Profile from "./Profile"
 
 export {
     Login,
@@ -16,4 +19,7 @@ export {
     Sell,
     Visits,
     DataUsers,
+    Contact,
+    Team,
+    Profile
 }

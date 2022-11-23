@@ -1,6 +1,21 @@
+import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { ListView } from "../components"
 import { getResource } from "../tools/resourceRequest"
+import {
+    Chart as ChartJS,
+    ArcElement,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Title,
+    Filler,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Chart, Line } from 'react-chartjs-2';
 
 export default function DataUsers(){
     const [users, setusers] = useState([]);
@@ -12,16 +27,14 @@ export default function DataUsers(){
         })() 
     });
     
-    const loadData = async ()=>{
+    const loadData = async () => {
         const { data } = await getResource('users')
-        console.log(data.data)
         setusers(prev => data.data)
     }
 
     const getModules = (proyects)=>{
         let result = []
         let modules = proyects.map( proyect => proyect.module.split(','))
-        console.log(modules)
         modules.forEach( module => {
             module.forEach( mod => {
                 if( !result.includes( mod ) ){
@@ -42,10 +55,51 @@ export default function DataUsers(){
         { key: 'id', name: 'Payment Methods', default: 'Paypal', format:(index,item)=>paymentMethods[Math.floor( Math.random()*paymentMethods.length )]}
     ]
 
-    return(<ListView 
-        headers={headers}
-        disableSelection
-        records={users}  
-        id={'id'}
-    />)
+    const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          title: {
+            display: true,
+            text: 'Estadisticas de compra',
+          },
+        },
+    };
+
+    const getData = () => {
+        let bcolor = []
+        let bgcolor = []
+        users.forEach( user=>{
+            let color = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255}`
+            bcolor.push(color+',1)')
+            bgcolor.push(color+',0.5)')
+        })
+        return {
+            labels: users.map(user=>user.nickname),
+            datasets: [{
+                label: '% Proyects',
+                data: users.map(user=>user.Proyects.length),
+                borderColor: bcolor,
+                backgroundColor: bgcolor
+            }]
+        }
+    }
+
+    return(<>
+        <Chart 
+            type={'pie'} 
+            height={300} 
+            options={{...options, maintainAspectRatio: false }} 
+            data={getData()} />
+        <ListView 
+            headers={headers}
+            disableSelection
+            records={users}  
+            id={'id'}
+            actionsTable={<Button variant='outlined'>Download</Button>}
+        />
+        
+        </>)
 }

@@ -1,6 +1,9 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography} from '@mui/material'
+import metodos from '../assets/metodos.png'
+import monitor from '../assets/monitor.png'
 import images from '../assets/images.jpeg'
 import pros from '../assets/props.jpg'
+import { Note } from "../components"
 
 export default function Home(){
     return(
@@ -9,26 +12,24 @@ export default function Home(){
             padding: '20px'
         }}>
             <Grid container>
-                <Grid item xs={12}>
-                    <Typography style={{fontSize:'50px', fontWeight:'bold', textAlign:'center'}}>Indicadores</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                    <img src={images} width={350} />
-                </Grid>
-                <Grid item xs={9}>
-                    <Typography style={{margin:'10px', fontSize: '25px'}}>Un indicador de gestión es una variable cuantitativa cuya finalidad es brindar información acerca del grado de cumplimiento de una meta de gestión. </Typography>
-                    <Typography style={{margin:'10px', fontSize: '25px'}}>Al medir el progreso hacia el logro de estas metas, funciona como una “señal de alerta” que muestra si se está trabajando en la senda correcta de acuerdo con los resultados planificados.</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography style={{fontSize:'50px', fontWeight:'bold', textAlign:'center'}}>Metodos Prospectivos</Typography>
-                </Grid>
-                <Grid item xs={9}>
-                    <Typography style={{margin:'10px', fontSize: '25px'}}>Para pensar en largo plazo no existe un solo camino, un único modo. Son muchas las técnicas que podrían utilizarse en la construcción de escenarios posibles.</Typography>
-                    <Typography style={{margin:'10px', fontSize: '25px'}}>Por ello no importa qué herramienta sea utilizada, sino qué aportes pueden obtenerse gracias a la prospectiva.</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                    <img src={pros} width={350} />
-                </Grid>
+                <Note 
+                    title='Indicadores Prospectivos'
+                    content='Son variable cuantitativa que brindan información acerca del grado de cumplimiento de una meta. Al medir el progreso hacia el logro de estas metas, funciona como una señal que muestra si se está trabajando en la senda correcta de acuerdo con los resultados planificados. En este sentido, sirve para detectar posibles desvíos y corregirlos'
+                    src={metodos}
+                    reverse
+                    />
+                <Note 
+                    title='Prospectiva'
+                    content='Prospectiva es un proceso sistemático, participativo, generador de conocimiento sobre el futuro y creador de visiones a largo-medio plazo, dirigido a apoyar la toma de decisiones presente y a movilizar acciones conjuntas'
+                    src={monitor}
+                    />
+                <Note 
+                    title='Métodos Prospectivos'
+                    content='Para pensar en largo plazo no existe un solo camino, un único modo. Son muchas las técnicas que podrían utilizarse en la construcción de escenarios posibles. Por ello no importa qué herramienta sea utilizada, sino qué aportes pueden obtenerse gracias a la prospectiva.'
+                    src={metodos}
+                    reverse
+                    />
+
             </Grid>
             
         </Box>

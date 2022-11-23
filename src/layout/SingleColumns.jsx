@@ -6,12 +6,8 @@ export default function DobleColumns( props ){
     const { 
         header,
         footer,
-        ColumnOne, 
-        ColumnTwo,
-        WidthOne,
-        WidthTwo,
-        StyleOne,
-        StyleTwo
+        Column, 
+        Style,
      } = props
 
     return(
@@ -19,11 +15,8 @@ export default function DobleColumns( props ){
         { header }
         <Box>
             <Grid container style={{ height: '100vh' }}>
-                <Grid item xs={ WidthOne } style={ StyleOne }>
-                    { ColumnOne }
-                </Grid>
-                <Grid item xs={ WidthTwo } style={ StyleTwo }>
-                { ColumnTwo }
+                <Grid item xs={ 12 } style={ Style }>
+                { Column }
                 </Grid>
             </Grid>
         </Box>
