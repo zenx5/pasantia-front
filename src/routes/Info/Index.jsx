@@ -8,7 +8,6 @@ import { Note } from "../../components"
 export default function Index(){
     return(
         <Box style={{
-            height: '100vh',
             padding: '20px'
         }}>
             <Grid container>

@@ -9,11 +9,11 @@ import {
     Tooltip as ToolMui
  } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material';
-import { LateralModules, ListView } from '../../components';
+import { ListView } from '../../components';
 
-import { trans, labels } from '../../tools/common';
+import { trans } from '../../tools/common';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getResource, setResource } from '../../tools/resourceRequest';
+import { getResource } from '../../tools/resourceRequest';
 import { 
     Chart as ChartJS,
     ArcElement,
@@ -193,8 +193,7 @@ export default function Entities( props ) {
                     <ListView 
                         headers={headers}
                         disableSelection
-                        records={entities}  
-                        // .filter( entity => (entity.influence>factorX/2 && entity.dependence>factorX/2) )
+                        records={entities.filter( entity => (entity.influence>factorX/2 && entity.dependence>factorX/2) )}
                         onView={handlerViewEvent}
                         id={'id'}
                         actionsTable={

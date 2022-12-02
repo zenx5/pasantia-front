@@ -92,12 +92,7 @@ export default function Stats( props ) {
 
     
     return (
-        <Box style={{
-        // height: '100vh',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // display: 'flex'
-        }}>
+        <Box>
             <Tabs value={tab} onChange={(ev, newValue)=>setTab(newValue)}>
                 <Tab label='element 0' value={0}/>
                 <Tab label='element 1' value={1}/>

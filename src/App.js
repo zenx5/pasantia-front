@@ -125,7 +125,15 @@ export default function App() {
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
               />
             } />
-          <Route path={`${process.env.REACT_APP_ROUTE_LOGIN}`} element={<Login onLogin={handlerEventLogin} error={errorLogin}/>} />
+          <Route 
+            path={`${process.env.REACT_APP_ROUTE_LOGIN}`} 
+            element={
+              <SingleColumns
+                verticalCenter
+                Column={<Login onLogin={handlerEventLogin} error={errorLogin}/>}
+              />
+            }            
+          />
           <Route 
             path={`${process.env.REACT_APP_ROUTE_MODULE}`}
             element={
@@ -179,6 +187,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_CONTACT}`}
             element={
               <SingleColumns 
+                verticalCenter
                 header={<NavigationBar />}
                 Column={<Contact />}
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
@@ -188,6 +197,7 @@ export default function App() {
             path={`${process.env.REACT_APP_ROUTE_TEAM}`}
             element={
               <SingleColumns 
+                verticalCenter
                 header={<NavigationBar />}
                 Column={<Team />}
                 footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}

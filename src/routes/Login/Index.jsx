@@ -24,7 +24,6 @@ export default function Index( props ) {
 
     return (
         <Box style={{
-        height: '100vh',
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex'
