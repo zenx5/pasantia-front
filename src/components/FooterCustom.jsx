@@ -9,9 +9,7 @@ export default function FooterCustom( props ){
         width:'100%',
         height:'40px',
 
-        position:'fixed',
-        bottom: '0px',
-
+        position: 'relative',
         display:'flex',
         justifyContent:'end',
         alignItems:'center',

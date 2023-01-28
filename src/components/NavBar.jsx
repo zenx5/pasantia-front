@@ -8,7 +8,6 @@ export default function NavBar( props ){
     return(
         <Grid container 
             style={{
-                padding: '20px 30px',
                 background: 'linear-gradient(-90deg, #252570, #6466cd)',
                 color: '#fff',
                 fontWeight: 'bold',

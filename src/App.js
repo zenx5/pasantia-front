@@ -46,14 +46,14 @@ export default function App() {
     const defaultMenu = [
       { label: 'Info', action: ()=>navigate(process.env.REACT_APP_ROUTE_INFO) },
       { label: 'Contactos', action: ()=>navigate(process.env.REACT_APP_ROUTE_CONTACT) },
-      { label: 'Team', action: ()=>navigate(process.env.REACT_APP_ROUTE_TEAM) },
+      //{ label: 'Team', action: ()=>navigate(process.env.REACT_APP_ROUTE_TEAM) },
     ]
     switch( type ){
       case 'administrador':
         return [
           ...defaultMenu,
           { label: 'Metodos Prospectivos', action: ()=>navigate(process.env.REACT_APP_ROUTE_MODULE) },
-          { label: 'Indicadores', action: ()=>navigate(process.env.REACT_APP_ROUTE_INDICATOR) },
+          //{ label: 'Indicadores', action: ()=>navigate(process.env.REACT_APP_ROUTE_INDICATOR) },
         ]
       case 'estudiante':
       case 'profesor':
@@ -112,7 +112,7 @@ export default function App() {
                 header={<NavigationBar />}
                 WidthTwo={12}
                 ColumnTwo={<Home />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -122,7 +122,7 @@ export default function App() {
                 header={<NavigationBar />}
                 WidthTwo={12}
                 ColumnTwo={<Info />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
           <Route path={`${process.env.REACT_APP_ROUTE_LOGIN}`} element={<Login onLogin={handlerEventLogin} error={errorLogin}/>} />
@@ -136,7 +136,7 @@ export default function App() {
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
                 ColumnOne={<LateralModules onClick={getProyects} />}
                 ColumnTwo={<Modules proyects={proyects} />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -149,7 +149,7 @@ export default function App() {
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
                 ColumnOne={<LateralModules onClick={getProyects} />}
                 ColumnTwo={<Modules proyects={proyects} />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -162,7 +162,7 @@ export default function App() {
                 StyleOne={{ backgroundColor: '#393b48', color:'#fff' }}
                 ColumnOne={<LateralModules onClick={getProyects} />}
                 ColumnTwo={<Entities />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -172,7 +172,7 @@ export default function App() {
                 header={<NavigationBar />}
                 WidthTwo={12}
                 ColumnTwo={<Stats />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -181,7 +181,7 @@ export default function App() {
               <SingleColumns 
                 header={<NavigationBar />}
                 Column={<Contact />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
           <Route 
@@ -190,7 +190,7 @@ export default function App() {
               <SingleColumns 
                 header={<NavigationBar />}
                 Column={<Team />}
-                footer={<FooterCustom content='Solórzano Aneli y Villarroel Adrián 2022'/>}
+                footer={<FooterCustom content='Villarroel Adrián 2022'/>}
               />
             } />
         </Routes>

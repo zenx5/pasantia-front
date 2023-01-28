@@ -15,7 +15,7 @@ export default function LatBar( props ){
     const { items } = props
 
     return(
-        <List>
+        <List style={{minHeight:'100vh'}}>
             {items.map( item => (<ListItem key={item.label}>
                 <ListItemButton disabled={item.disabled} onClick={item.action}>
                     <ListItemIcon>

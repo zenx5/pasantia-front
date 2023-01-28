@@ -15,10 +15,10 @@ export default function DobleColumns( props ){
      } = props
 
     return(
-    <>
+    <Box container style={{ height: '100%', display:'flex', flexDirection:'column', justifyContent:'space-between' }}>
         { header }
-        <Box>
-            <Grid container style={{ height: '100vh' }}>
+        <Box style={{ height:'100%' }}>
+            <Grid container>
                 <Grid item xs={ WidthOne } style={ StyleOne }>
                     { ColumnOne }
                 </Grid>
@@ -28,5 +28,5 @@ export default function DobleColumns( props ){
             </Grid>
         </Box>
         { footer }
-    </>)
+    </Box>)
 }
